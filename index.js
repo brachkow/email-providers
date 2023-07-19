@@ -43,7 +43,13 @@ export const PROVIDERS = [
   },
 ];
 
-export const getProvider = (id) => PROVIDERS.find((provider) => provider.id === id); //#FIXME Completely rename to getProviderById in next version
+export const getProvider = (id) =>
+  PROVIDERS.find((provider) => provider.id === id); //#FIXME Completely rename to getProviderById in next version
 export const getProviderById = getProvider;
+
+export const getProviderByMatch = (value) =>
+  PROVIDERS.find((provider) => {
+    return provider.keywords.find((keyword) => value.includes(keyword));
+  });
 
 export default PROVIDERS;

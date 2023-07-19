@@ -5,5 +5,7 @@ export const PROVIDERS: {
     keywords: string[];
 }[];
 export function getProvider(id: any): any;
+export function getProviderById(id: any): any;
+export function getProviderByMatch(value: any): any;
 export default PROVIDERS;
 //# sourceMappingURL=index.d.ts.map
