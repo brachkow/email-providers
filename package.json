@@ -1,6 +1,6 @@
 {
   "name": "@brachkow/email-providers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "URLs of popular email providers as JS object",
   "main": "index.js",
   "repository": {
@@ -8,5 +8,8 @@
     "url": "https://github.com/brachkow/email-providers.git"
   },
   "author": "Timur Brachkow",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
 }
