@@ -43,6 +43,7 @@ export const PROVIDERS = [
   },
 ];
 
-export const getProvider = (id) => PROVIDERS.find((provider) => provider.id === id);
+export const getProvider = (id) => PROVIDERS.find((provider) => provider.id === id); //#FIXME Completely rename to getProviderById in next version
+export const getProviderById = getProvider;
 
 export default PROVIDERS;
