@@ -1,4 +1,5 @@
 {
   "name": "@brachkow/email-providers",
-  "main": "index.js"
+  "main": "index.js",
+  "license": "MIT"
 }
