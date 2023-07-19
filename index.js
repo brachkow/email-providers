@@ -1,4 +1,4 @@
-const PROVIDERS = [
+export const PROVIDERS = [
   {
     id: 'GMAIL',
     url: 'https://mail.google.com/',
