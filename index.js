@@ -39,8 +39,10 @@ const PROVIDERS = [
     id: 'APPLE',
     url: 'https://www.icloud.com/mail/',
     label: 'iCloud Mail',
-    keyword: ['@icloud'],
+    keywords: ['@icloud'],
   },
 ];
+
+export const getProvider = (id) => PROVIDERS.find((provider) => provider.id === id);
 
 export default PROVIDERS;
