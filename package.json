@@ -1,6 +1,6 @@
 {
   "name": "@brachkow/email-providers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "URLs of popular email providers as JS object",
   "main": "index.js",
   "repository": {
