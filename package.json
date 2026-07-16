@@ -3,6 +3,19 @@
   "version": "1.2.0",
   "description": "URLs of popular email providers as JS object",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.d.ts.map"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack": "tsc",
+    "prepublishOnly": "pnpm test && pnpm typecheck",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/brachkow/email-providers.git"
@@ -13,6 +26,7 @@
   "author": "Timur Brachkow",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^4.1.10"
   }
 }

@@ -1,7 +1,10 @@
 {
   "include": ["index.js"],
+  "exclude": ["tests"],
   "compilerOptions": {
+    "target": "es2020",
     "allowJs": true,
+    "checkJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": true
