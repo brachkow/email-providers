@@ -14,7 +14,8 @@
     "prepublishOnly": "pnpm test && pnpm typecheck",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "validate:urls": "node scripts/generate-hurl.mjs > providers.hurl && hurl --test --continue-on-error --connect-timeout 15 --max-time 30 providers.hurl"
   },
   "repository": {
     "type": "git",

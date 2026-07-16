@@ -3,3 +3,4 @@ index.d.ts
 index.d.ts.map
 *.tsbuildinfo
 PROVIDERS.md
+providers.hurl

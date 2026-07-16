@@ -1,0 +1,19 @@
+name: Validate URLs
+
+# Provider URLs rot without warning (protonmail.com -> proton.me,
+# tutanota.com -> tuta.com). This canary catches that. It talks to 28
+# third-party sites, so it is deliberately NOT part of CI: a provider being
+# down must never turn an unrelated pull request red.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      # No pnpm install: the generator only imports index.js, and hurl comes from mise.
+      - run: pnpm validate:urls
