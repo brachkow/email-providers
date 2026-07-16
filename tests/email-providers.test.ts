@@ -59,6 +59,52 @@ describe('getProviderByEmail', () => {
   it('returns undefined for an unknown domain', () => {
     expect(getProviderByEmail('user@example.com')).toBeUndefined()
   })
+
+  // Guards against keyword shadowing: matching is a substring test resolved by
+  // array order, so an earlier provider's keyword can silently swallow a later one.
+  it.each(
+    PROVIDERS.flatMap((provider) =>
+      provider.keywords.map((keyword) => [provider.id, keyword]),
+    ),
+  )('resolves %s from its own keyword %s', (id, keyword) => {
+    expect(getProviderByEmail(`user${keyword}`)?.id).toBe(id)
+  })
+
+  it.each([
+    ['user@zoho.com', 'ZOHO'],
+    ['user@hotmail.com', 'OUTLOOK'],
+    ['user@hotmail.co.uk', 'OUTLOOK'],
+    ['user@live.com', 'OUTLOOK'],
+    ['user@live.com.au', 'OUTLOOK'],
+    ['user@msn.com', 'OUTLOOK'],
+    ['user@bk.ru', 'MAILRU'],
+    ['user@inbox.ru', 'MAILRU'],
+    ['user@me.com', 'APPLE'],
+    ['user@mac.com', 'APPLE'],
+    ['user@googlemail.com', 'GMAIL'],
+    ['user@ymail.com', 'YAHOO'],
+    ['user@vip.qq.com', 'QQ'],
+    ['user@gmx.com', 'GMX_COM'],
+    ['user@gmx.net', 'GMX'],
+    ['user@163.com', 'NETEASE_163'],
+    ['user@126.com', 'NETEASE_126'],
+  ])('resolves %s to %s', (email, id) => {
+    expect(getProviderByEmail(email)?.id).toBe(id)
+  })
+
+  // Substring matching makes bare brand keywords unsafe — these domains belong
+  // to unrelated services and must not be mistaken for a provider.
+  it.each([
+    'user@livescore.com',
+    'user@msnbc.com',
+    'user@inbox.lv',
+    'user@zohocorp.com',
+    'user@acme.com',
+    'user@home.com',
+    'user@bigmac.com',
+  ])('does not falsely match %s', (email) => {
+    expect(getProviderByEmail(email)).toBeUndefined()
+  })
 })
 
 describe('default export', () => {
