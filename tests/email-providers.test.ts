@@ -31,6 +31,40 @@ describe('PROVIDERS', () => {
   })
 })
 
+describe('provider apps', () => {
+  const withApp = PROVIDERS.filter((provider) => provider.app).map(
+    (provider) => [provider.id, provider.app] as const,
+  )
+
+  it('has at least one provider carrying app data', () => {
+    expect(withApp.length).toBeGreaterThan(0)
+  })
+
+  it.each(withApp)('%s exposes exactly ios and android', (_id, app) => {
+    expect(Object.keys(app).sort()).toEqual(['android', 'ios'])
+  })
+
+  // `app` is omitted rather than filled with nulls when a provider ships no
+  // app at all, so an entry that reached this point must offer a platform.
+  it.each(withApp)('%s offers at least one platform', (_id, app) => {
+    expect(app.ios ?? app.android).not.toBeNull()
+  })
+
+  it.each(withApp.filter(([, app]) => app.ios))(
+    '%s has an ios url scheme',
+    (_id, app) => {
+      expect(app.ios).toMatch(/^[a-z][a-z0-9+.-]*:\/\/$/)
+    },
+  )
+
+  it.each(withApp.filter(([, app]) => app.android))(
+    '%s has a reverse-dns android package name',
+    (_id, app) => {
+      expect(app.android).toMatch(/^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+$/)
+    },
+  )
+})
+
 describe('getProvider', () => {
   it('returns the provider for a known id', () => {
     expect(getProvider('GMAIL')?.label).toBe('GMail')
