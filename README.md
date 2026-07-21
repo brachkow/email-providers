@@ -5,7 +5,7 @@ URLs of popular email providers as JS object.
 ## Installation and usage
 
 ```
-npm i @brachkow/email-providers
+pnpm i @brachkow/email-providers
 ```
 
 ```js
